@@ -5,11 +5,13 @@
     "outDir": "./dist", 
     "rootDir": "./src", 
     "strict": true, 
-    "moduleResolution": "bundler", 
+    "esModuleInterop": false, 
+    "moduleResolution": "node", 
     "skipLibCheck": true, 
     "forceConsistentCasingInFileNames": true, 
-    "declaration": true 
+    "declaration": true,
+    "ignoreDeprecations": "6.0",
   }, 
   "include": ["src/**/*"], 
   "exclude": ["node_modules", "dist", "**/*.test.ts"] 
-} 
+}
