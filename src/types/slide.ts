@@ -10,6 +10,6 @@ objects: SlideObject[];
 type Background=
  { type: 'none'} 
  | { type: 'color'; color: string } 
- | {type: 'image'; imageUrl: string } ;
-
+ | {type: 'image'; imageUrl: string } 
+ |{type: 'gradient'; colors: string[]};
 export {Slide, Background };
