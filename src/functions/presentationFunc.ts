@@ -13,18 +13,24 @@ function createPresentation(name: string): Presentation{
                 background: {type: 'none'},
                 objects: [],
             }
-        ]
+        ],
+        activeSlideId: titleSlideId
     };
 }
 
 function updatePresentationName(presentation: Presentation, name: string): Presentation{
-
+    return{
+        ...presentation,
+        name: name
+    }
 }
 
 function savePresentation(presentation: Presentation): string{
-
+    return JSON.stringify(presentation);
 }
 
-function loadPresentation(presentation: Presentation): Presentation{
-
+function loadPresentation(jsonString: string): Presentation{
+    return JSON.parse(jsonString);
 }
+
+export {createPresentation, updatePresentationName, savePresentation, loadPresentation};
