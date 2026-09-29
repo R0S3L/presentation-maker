@@ -11,21 +11,29 @@ describe('Presentation', () => {
 
         expect(presentation.id).toBeDefined();
         expect(typeof presentation.id).toBe('string');
+        expect(presentation.name).toBe('test');
 
-        expect(presentation.name).toBe('Новая презентация');
-        expect(presentation.activeSlideId).toBe('');
-        expect(presentation.slides).toEqual([]);
+        expect(presentation.slides).toHaveLength(1);
+        const titleSlide = presentation.slides[0];
+
+        expect(typeof titleSlide.id).toBe('string');
+        expect(presentation.activeSlideId).toBe(titleSlide.id);
+        expect(titleSlide).toEqual({
+            id: titleSlide.id,
+            name: 'Title',
+            background: { type: 'none' },
+            objects: [],
+        });
     });
-
     test('createPresentation — исходные данные отсутствуют и не изменяются', () => {
-        const presentation = createPresentation('test');
+        const presentation = createPresentation('Новая презентация');
 
         const copy = {
             ...presentation,
             slides: [...presentation.slides]
         };
 
-        const result = createPresentation('test');
+        const result = createPresentation('Новая презентация');
 
         expect(presentation).toEqual(copy);
         expect(result).not.toBe(presentation);
@@ -80,11 +88,11 @@ describe('Presentation', () => {
             'Первый слайд'
         );
 
-        expect(result.slides).toHaveLength(1);
-        expect(result.slides[0].name).toBe('Первый слайд');
+        expect(result.slides).toHaveLength(2);
+        expect(result.slides[1].name).toBe('Первый слайд');
 
         expect(result.activeSlideId).toBe(
-            result.slides[0].id
+            result.slides[1].id
         );
 
         expect(result.slides[0].objects).toEqual([]);
@@ -95,33 +103,5 @@ describe('Presentation', () => {
         expect(presentation).toEqual(original);
         expect(result).not.toBe(presentation);
         expect(result.slides).not.toBe(presentation.slides);
-    });
-
-    test('addSlide — второй слайд не меняет активный первый', () => {
-        const presentation = createPresentation('test');
-
-        const first = addSlide(
-            presentation,
-            'Первый'
-        );
-
-        const original = structuredClone(first);
-
-        const second = addSlide(
-            first,
-            'Второй'
-        );
-
-        expect(second.slides).toHaveLength(2);
-
-        expect(second.activeSlideId).toBe(
-            first.activeSlideId
-        );
-
-        expect(second.slides[1].name).toBe('Второй');
-
-        expect(first).toEqual(original);
-        expect(second).not.toBe(first);
-        expect(second.slides).not.toBe(first.slides);
-    });
+    });  
 });
