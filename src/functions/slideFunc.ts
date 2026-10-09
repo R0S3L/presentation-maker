@@ -19,6 +19,19 @@ function addSlide( presentation: Presentation, slideName: string = 'Новый �
     };
 }
 
+function updateSlide(
+  presentation: Presentation,
+  slideId: string,
+  update: (slide: Slide) => Slide,
+): Presentation {
+  return {
+    ...presentation,
+    slides: presentation.slides.map(slide =>
+      slide.id === slideId ? update(slide) : slide,
+    ),
+  };
+}
+
 function removeSlides(presentation: Presentation,slideIds: string[]): Presentation {
     if (presentation.slides.length === 0) {
         return presentation;
@@ -162,4 +175,4 @@ function clearSlideBackground(slide: Slide): Slide {
     };
 }
 
-export { addSlide, removeSlides, moveSlide, setActiveSlide, duplicateSlide, setSlideBackgroundColor, setSlideBackgroundImage, setSlideBackgroundGradient, clearSlideBackground };
+export { addSlide, updateSlide, removeSlides, moveSlide, setActiveSlide, duplicateSlide, setSlideBackgroundColor, setSlideBackgroundImage, setSlideBackgroundGradient, clearSlideBackground };

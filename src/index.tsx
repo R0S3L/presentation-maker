@@ -1,6 +1,6 @@
 import { createRoot } from 'react-dom/client';
 import { App } from './components/App';
-import { addEditorChangeHandler, setInitialState } from './editor';
+import { addEditorChangeHandler, getState, setInitialState } from './editor';
 import { createTestPresentation } from './data';
 
 // Устанавливаем начальное состояние
@@ -11,7 +11,10 @@ setInitialState(initialData);
 const root = createRoot(document.getElementById('root')!);
 
 function renderApp(): void {
-  root.render(<App />);
+  const presentation = getState();
+  if (presentation) {
+    root.render(<App presentation={presentation} />);
+  }
 }
 
 // Первичная рендерка

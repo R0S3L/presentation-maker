@@ -1,0 +1,8 @@
+.toolbar { min-height: 82px; display: flex; align-items: center; gap: 18px; padding: 12px 24px; background: rgba(255, 254, 250, .94); border-bottom: 1px solid var(--line); }
+.brand-mark { display: grid; place-items: center; flex: 0 0 42px; height: 42px; border-radius: 12px; color: #fffefa; background: var(--green); font: 800 22px 'Manrope', sans-serif; }
+.brand-mark span { color: #e9a765; }
+.presentation-title { display: grid; gap: 3px; min-width: 180px; }
+.eyebrow { color: var(--muted); font-size: 9px; font-weight: 700; letter-spacing: 1px; }
+.title-input { min-height: 26px; padding: 0; border: 0; background: transparent; font: 700 15px 'Manrope', sans-serif; }
+.title-input:focus { box-shadow: none; }
+.toolbar-actions { display: flex; align-items: center; justify-content: flex-end; gap: 8px; margin-left: auto; }
