@@ -12,5 +12,7 @@ function generateId(): string{
     return `${timestamp}+${randomValue}`
 }
 
+
+
 export type {Slide, Background, Presentation, SlideObject, TextObject, ImageObject};
 export { generateId, createPresentation, updatePresentationName, savePresentation, loadPresentation, addSlide, removeSlides, moveSlide, setActiveSlide, duplicateSlide, setSlideBackgroundColor, setSlideBackgroundImage, setSlideBackgroundGradient, clearSlideBackground, addTextObject, addImageObject, removeObject, moveObject, resizeObject, updateTextObjectStyle };

@@ -2,10 +2,7 @@ import { Presentation } from '../types/presentation';
 import { Slide } from '../types/slide';
 import { generateId } from '../index.js';
 
-function addSlide(
-    presentation: Presentation,
-    slideName: string = 'Новый слайд'
-): Presentation {
+function addSlide( presentation: Presentation, slideName: string = 'Новый слайд'): Presentation {
     const newSlide: Slide = {
         id: generateId(),
         name: slideName,
