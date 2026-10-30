@@ -6,10 +6,20 @@ import styles from './SlidePreview.module.css';
 type SlidePreviewProps = {
 	slide: Slide;
 	onDeleteObject?: (objectId: string) => void;
+	selectedObjectIds?: string[];
+	onObjectClick?: (objectId: string, shiftKey: boolean) => void;
+	onCanvasClick?: () => void;
 	variant?: 'thumbnail' | 'presentation';
 };
 
-function SlidePreview({ slide, onDeleteObject, variant }: SlidePreviewProps) {
+function SlidePreview({
+	slide,
+	onDeleteObject,
+	selectedObjectIds = [],
+	onObjectClick,
+	onCanvasClick,
+	variant,
+}: SlidePreviewProps) {
 	const backgroundStyle: CSSProperties = {};
 
 	switch (slide.background.type) {
@@ -35,9 +45,16 @@ function SlidePreview({ slide, onDeleteObject, variant }: SlidePreviewProps) {
 			style={backgroundStyle}
 			role="group"
 			aria-label={slide.name}
+			onClick={onCanvasClick}
 		>
 			{slide.objects.map(object => (
-				<SlideObject key={object.id} object={object} onRemove={onDeleteObject} />
+				<SlideObject
+					key={object.id}
+					object={object}
+					onRemove={onDeleteObject}
+					selected={selectedObjectIds.includes(object.id)}
+					onClick={onObjectClick}
+				/>
 			))}
 		</div>
 	);
