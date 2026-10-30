@@ -1,21 +1,79 @@
 @media (max-width: 960px) {
-  .workspace { grid-template-columns: minmax(0, 1fr); padding: 24px; }
-  .properties-panel { grid-template-columns: repeat(3, minmax(0, 1fr)); align-items: start; }
-  .properties-panel .panel-heading { grid-column: 1 / -1; }
+  .workspace {
+    grid-template-columns: minmax(0, 1fr);
+    padding: 24px;
+  }
+
+  .properties-panel {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    align-items: start;
+  }
+
+  .properties-panel .panel-heading {
+    grid-column: 1 / -1;
+  }
 }
 
 @media (max-width: 680px) {
-  .toolbar { flex-wrap: wrap; gap: 10px; padding: 12px 14px; }
-  .presentation-title { flex: 1; }
-  .toolbar-actions { justify-content: flex-start; width: 100%; margin-left: 52px; overflow-x: auto; }
-  .editor-layout { grid-template-columns: 1fr; }
-  .slide-list { padding: 14px; border-right: 0; border-bottom: 1px solid var(--line); }
-  .slide-list-items { grid-auto-columns: 142px; grid-auto-flow: column; overflow-x: auto; }
-  .workspace { padding: 18px 14px; }
-  .properties-panel { grid-template-columns: 1fr; }
-  .properties-panel .panel-heading { grid-column: auto; }
-  .preview-overlay { padding: 12px; }
-  .preview-stage { gap: 7px; }
-  .preview-slide { width: calc(100vw - 100px); }
-  .preview-nav { padding: 0 8px; font-size: 10px; }
+  .toolbar {
+    flex-wrap: wrap;
+    gap: 10px;
+    padding: 12px 14px;
+  }
+
+  .presentation-title {
+    flex: 1;
+  }
+
+  .toolbar-actions {
+    justify-content: flex-start;
+    width: 100%;
+    margin-left: 52px;
+    overflow-x: auto;
+  }
+
+  .editor-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .slide-list {
+    padding: 14px;
+    border-right: 0;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .slide-list-items {
+    grid-auto-columns: 142px;
+    grid-auto-flow: column;
+    overflow-x: auto;
+  }
+
+  .workspace {
+    padding: 18px 14px;
+  }
+
+  .properties-panel {
+    grid-template-columns: 1fr;
+  }
+
+  .properties-panel .panel-heading {
+    grid-column: auto;
+  }
+
+  .preview-overlay {
+    padding: 12px;
+  }
+
+  .preview-stage {
+    gap: 7px;
+  }
+
+  .preview-slide {
+    width: calc(100vw - 100px);
+  }
+
+  .preview-nav {
+    padding: 0 8px;
+    font-size: 10px;
+  }
 }

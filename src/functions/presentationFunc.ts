@@ -9,7 +9,7 @@ function createPresentation(name: string): Presentation{
         slides: [
             {
                 id: titleSlideId,
-                name: "Title",
+                name: "Первый слайд",
                 background: {type: 'none'},
                 objects: [],
             }
