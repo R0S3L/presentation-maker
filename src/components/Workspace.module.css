@@ -1,0 +1,55 @@
+.workspace {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 250px;
+  align-items: start;
+  gap: 24px;
+  padding: 32px clamp(18px, 4vw, 58px);
+}
+
+.empty {
+  display: grid;
+  place-items: center;
+  color: var(--muted);
+}
+
+.empty p {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.canvasArea {
+  display: grid;
+  gap: 12px;
+  min-width: 0;
+  padding-top: 3px;
+}
+
+.canvasMeta {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+}
+
+.canvasMeta span {
+  color: var(--muted);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+.canvasMeta strong {
+  font: 700 13px 'Manrope', sans-serif;
+}
+
+@media (max-width: 960px) {
+  .workspace {
+    grid-template-columns: minmax(0, 1fr);
+    padding: 24px;
+  }
+}
+
+@media (max-width: 680px) {
+  .workspace {
+    padding: 18px 14px;
+  }
+}

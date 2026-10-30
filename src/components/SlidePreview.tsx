@@ -1,13 +1,15 @@
 import type { CSSProperties } from 'react';
 import type { Slide } from '../types/slide';
 import { SlideObject } from './SlideObject';
+import styles from './SlidePreview.module.css';
 
 type SlidePreviewProps = {
 	slide: Slide;
 	onDeleteObject?: (objectId: string) => void;
+	variant?: 'thumbnail' | 'presentation';
 };
 
-function SlidePreview({ slide, onDeleteObject }: SlidePreviewProps) {
+function SlidePreview({ slide, onDeleteObject, variant }: SlidePreviewProps) {
 	const backgroundStyle: CSSProperties = {};
 
 	switch (slide.background.type) {
@@ -28,7 +30,12 @@ function SlidePreview({ slide, onDeleteObject }: SlidePreviewProps) {
 	}
 
 	return (
-		<div className="slide-canvas" style={backgroundStyle} aria-label={slide.name}>
+		<div
+			className={`${styles.canvas} ${variant ? styles[variant] : ''}`.trim()}
+			style={backgroundStyle}
+			role="group"
+			aria-label={slide.name}
+		>
 			{slide.objects.map(object => (
 				<SlideObject key={object.id} object={object} onRemove={onDeleteObject} />
 			))}

@@ -7,6 +7,7 @@ import { addSlide } from '../functions/slideFunc';
 import { Button } from './Button';
 import { TextInput } from './TextInput';
 import { updateSlide } from '../functions/slideFunc';
+import styles from './Toolbar.module.css';
 
 type ToolbarProps = { presentation: Presentation; onPreview: () => void };
 
@@ -36,29 +37,29 @@ function Toolbar({ presentation, onPreview }: ToolbarProps) {
 	}
 
 	return (
-		<header className="toolbar">
-			<div className="brand-mark" aria-label="Presentation Maker">P<span>.</span></div>
-			<div className="presentation-title">
-				<span className="eyebrow">ПРЕЗЕНТАЦИЯ</span>
+		<header className={styles.toolbar}>
+			<div className={styles.brandMark} role="img" aria-label="Presentation Maker">P<span>.</span></div>
+			<div className={styles.presentationTitle}>
+				<span className={styles.eyebrow}>ПРЕЗЕНТАЦИЯ</span>
 				<TextInput
-					className="title-input"
+					variant="title"
 					value={presentation.name}
 					placeholder="Название презентации"
 					onChange={name => dispatch(updatePresentationName, name)}
 				/>
 			</div>
-			<div className="toolbar-actions">
-				<Button text="＋ Слайд" className="button-secondary" onClick={() => dispatch(addSlide, 'Новый слайд')} />
+			<div className={styles.actions}>
+				<Button text="＋ Слайд" variant="secondary" onClick={() => dispatch(addSlide, 'Новый слайд')} />
 				<input
 					ref={imageInput}
-					className="visually-hidden"
+					className="visuallyHidden"
 					type="file"
 					accept="image/*"
 					onChange={event => { addImage(event.currentTarget.files?.[0]); event.currentTarget.value = ''; }}
 				/>
-				<Button text="Изображение" className="button-secondary" onClick={() => imageInput.current?.click()} disabled={!activeSlide} />
-				<Button text="Сохранить" className="button-secondary" onClick={save} />
-				<Button text="Предпросмотр" className="button-primary" onClick={onPreview} />
+				<Button text="Изображение" variant="secondary" onClick={() => imageInput.current?.click()} disabled={!activeSlide} />
+				<Button text="Сохранить" variant="secondary" onClick={save} />
+				<Button text="Предпросмотр" variant="primary" onClick={onPreview} />
 			</div>
 		</header>
 	);

@@ -1,17 +1,21 @@
+import styles from './TextInput.module.css';
+
+type TextInputVariant = 'title' | 'color';
+
 type TextInputProps = {
 	value: string;
 	placeholder?: string;
 	type?: 'text' | 'color' | 'number';
 	onChange?: (value: string) => void;
-	className?: string;
+	variant?: TextInputVariant;
 	id?: string;
 };
 
-function TextInput({ value, placeholder, type = 'text', onChange, className = '', id }: TextInputProps) {
+function TextInput({ value, placeholder, type = 'text', onChange, variant, id }: TextInputProps) {
 	return (
 		<input
 			id={id}
-			className={`text-input ${className}`.trim()}
+			className={`${styles.input} ${variant ? styles[variant] : ''}`.trim()}
 			type={type}
 			value={value}
 			placeholder={placeholder}

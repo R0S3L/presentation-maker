@@ -1,0 +1,21 @@
+.canvas {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  container-type: inline-size;
+  border: 1px solid rgba(24, 53, 54, .12);
+  border-radius: 3px;
+  background-color: #fff;
+  box-shadow: 0 18px 55px rgba(39, 71, 63, .13);
+}
+
+.thumbnail {
+  border: 0;
+  box-shadow: none;
+  pointer-events: none;
+}
+
+.presentation {
+  max-height: 78vh;
+}

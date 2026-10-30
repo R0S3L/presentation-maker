@@ -1,0 +1,33 @@
+.input {
+  width: 100%;
+  min-height: 38px;
+  padding: 8px 10px;
+  border: 1px solid var(--line);
+  border-radius: 5px;
+  outline: none;
+  color: var(--ink);
+  background: #fffefa;
+}
+
+.input:focus {
+  border-color: #559681;
+  box-shadow: 0 0 0 2px rgba(85, 150, 129, .14);
+}
+
+.title {
+  min-height: 26px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  font: 700 15px 'Manrope', sans-serif;
+}
+
+.title:focus {
+  box-shadow: none;
+}
+
+.color {
+  width: 43px;
+  height: 34px;
+  padding: 3px;
+}

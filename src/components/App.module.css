@@ -1,0 +1,16 @@
+.appShell {
+  min-height: 100vh;
+  background: radial-gradient(ellipse at 70% 5%, #fbf6e9 0, transparent 35%), #eef2ef;
+}
+
+.editorLayout {
+  display: grid;
+  grid-template-columns: 230px minmax(0, 1fr);
+  min-height: calc(100vh - 82px);
+}
+
+@media (max-width: 680px) {
+  .editorLayout {
+    grid-template-columns: 1fr;
+  }
+}

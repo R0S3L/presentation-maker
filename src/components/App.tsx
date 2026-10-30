@@ -4,6 +4,7 @@ import { PreviewOverlay } from './PreviewOverlay';
 import { SlideList } from './SlideList';
 import { Toolbar } from './Toolbar';
 import { Workspace } from './Workspace';
+import styles from './App.module.css';
 
 type AppProps = {
   presentation: Presentation;
@@ -17,9 +18,9 @@ function App({ presentation }: AppProps) {
   }
 
   return (
-    <main className="app-shell">
+    <main className={styles.appShell}>
       <Toolbar presentation={presentation} onPreview={() => setIsPreviewOpen(true)} />
-      <div className="editor-layout">
+      <div className={styles.editorLayout}>
         <SlideList presentation={presentation} />
         <Workspace presentation={presentation} />
       </div>

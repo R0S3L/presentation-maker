@@ -1,4 +1,5 @@
 import type { ImageObject, SlideObject as SlideObjectModel, TextObject } from '../types/objects';
+import styles from './SlideObject.module.css';
 
 type SlideObjectProps = {
   object: SlideObjectModel;
@@ -18,15 +19,15 @@ function SlideObject({ object, onRemove }: SlideObjectProps) {
   };
 
   return (
-    <div className="slide-object" style={positionStyle}>
+    <div className={styles.object} style={positionStyle}>
       {isImageObject(object) ? (
-        <img className="slide-object-image" src={object.path} alt="" />
+        <img className={styles.image} src={object.path} alt="" />
       ) : (
         <TextSlideObject object={object} />
       )}
       {onRemove && (
         <button
-          className="object-remove"
+          className={styles.remove}
           type="button"
           aria-label="Удалить объект"
           onClick={() => onRemove(object.id)}
@@ -41,7 +42,7 @@ function SlideObject({ object, onRemove }: SlideObjectProps) {
 function TextSlideObject({ object }: { object: TextObject }) {
   return (
     <div
-      className="slide-object-text"
+      className={styles.text}
       style={{
         color: object.contentColor,
         fontFamily: object.fontFamily,

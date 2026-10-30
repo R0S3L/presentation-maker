@@ -1,14 +1,18 @@
+import styles from './Button.module.css';
+
+type ButtonVariant = 'secondary' | 'primary' | 'quiet' | 'previewClose' | 'previewNav';
+
 type ButtonProps = {
 	text: string;
 	onClick: () => void;
-	className?: string;
+	variant?: ButtonVariant;
 	disabled?: boolean;
 };
 
-function Button({ text, onClick, className = '', disabled = false }: ButtonProps) {
+function Button({ text, onClick, variant, disabled = false }: ButtonProps) {
 	return (
 		<button
-			className={`button ${className}`.trim()}
+			className={`${styles.button} ${variant ? styles[variant] : ''}`.trim()}
 			type="button"
 			onClick={onClick}
 			disabled={disabled}
