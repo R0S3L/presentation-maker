@@ -4,6 +4,7 @@
   width: 100%;
   aspect-ratio: 16 / 9;
   container-type: inline-size;
+  user-select: none;
   border: 1px solid rgba(24, 53, 54, .12);
   border-radius: 3px;
   background-color: #fff;
@@ -18,4 +19,9 @@
 
 .presentation {
   max-height: 78vh;
+}
+
+.pdf {
+  border-radius: 0;
+  box-shadow: none;
 }

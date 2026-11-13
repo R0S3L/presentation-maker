@@ -1,5 +1,6 @@
-import { useState } from 'react';
 import type { Presentation } from '../types/presentation';
+import { useHistoryUI } from '../hooks/useHistoryUI';
+import { usePreviewDialog } from '../hooks/usePreviewDialog';
 import { PreviewOverlay } from './PreviewOverlay';
 import { SlideList } from './SlideList';
 import { Toolbar } from './Toolbar';
@@ -11,15 +12,16 @@ type AppProps = {
 };
 
 function App({ presentation }: AppProps) {
-  const [isPreviewOpen, setIsPreviewOpen] = useState(false);
+  const { isOpen, open, close } = usePreviewDialog();
+  const history = useHistoryUI();
 
-  if (isPreviewOpen) {
-    return <PreviewOverlay presentation={presentation} onClose={() => setIsPreviewOpen(false)} />;
+  if (isOpen) {
+    return <PreviewOverlay presentation={presentation} onClose={close} />;
   }
 
   return (
     <main className={styles.appShell}>
-      <Toolbar presentation={presentation} onPreview={() => setIsPreviewOpen(true)} />
+      <Toolbar presentation={presentation} onPreview={open} {...history} />
       <div className={styles.editorLayout}>
         <SlideList presentation={presentation} />
         <Workspace presentation={presentation} />

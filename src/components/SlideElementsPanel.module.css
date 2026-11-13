@@ -1,0 +1,26 @@
+.panel {
+  display: grid;
+  align-content: start;
+  gap: 17px;
+  padding: 18px;
+  border: 1px solid var(--line);
+  border-radius: 7px;
+  background: var(--paper);
+}
+
+.panelHeading h2 {
+  margin: 0;
+  font: 700 14px 'Manrope', sans-serif;
+}
+
+.section {
+  display: grid;
+  gap: 9px;
+  padding-top: 14px;
+  border-top: 1px solid #e9eeea;
+}
+
+.section h3 {
+  margin: 0;
+  font: 700 12px 'Manrope', sans-serif;
+}

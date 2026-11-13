@@ -7,13 +7,22 @@ type SlideObjectProps = {
   onRemove?: (objectId: string) => void;
   selected?: boolean;
   onClick?: (objectId: string, shiftKey: boolean) => void;
+  onMouseDown?: (event: MouseEvent<HTMLDivElement>, objectId: string) => void;
+  onResizeMouseDown?: (event: MouseEvent<HTMLDivElement>, object: SlideObjectModel) => void;
 };
 
 function isImageObject(object: SlideObjectModel): object is ImageObject {
   return 'type' in object && object.type === 'image';
 }
 
-function SlideObject({ object, onRemove, selected = false, onClick }: SlideObjectProps) {
+function SlideObject({
+  object,
+  onRemove,
+  selected = false,
+  onClick,
+  onMouseDown,
+  onResizeMouseDown,
+}: SlideObjectProps) {
   const positionStyle = {
     left: `${(object.x_coord / 640) * 100}%`,
     top: `${(object.y_coord / 360) * 100}%`,
@@ -29,11 +38,20 @@ function SlideObject({ object, onRemove, selected = false, onClick }: SlideObjec
         event.stopPropagation();
         onClick?.(object.id, event.shiftKey);
       }}
+      onMouseDown={event => onMouseDown?.(event, object.id)}
     >
       {isImageObject(object) ? (
         <img className={styles.image} src={object.path} alt="" />
       ) : (
         <TextSlideObject object={object} />
+      )}
+      {selected && onResizeMouseDown && (
+        <div
+          className={styles.resizeHandle}
+          aria-hidden="true"
+          onMouseDown={event => onResizeMouseDown(event, object)}
+          onClick={event => event.stopPropagation()}
+        />
       )}
       {onRemove && (
         <button
@@ -44,6 +62,7 @@ function SlideObject({ object, onRemove, selected = false, onClick }: SlideObjec
             event.stopPropagation();
             onRemove(object.id);
           }}
+          onMouseDown={event => event.stopPropagation()}
         >
             ×
         </button>

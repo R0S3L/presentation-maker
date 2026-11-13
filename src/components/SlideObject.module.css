@@ -38,7 +38,16 @@
   line-height: 18px;
 }
 
-.object:hover .remove,
-.remove:focus-visible {
+.selected .remove {
   display: block;
+}
+
+.resizeHandle {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 10px;
+  height: 10px;
+  background: var(--green);
+  cursor: nwse-resize;
 }

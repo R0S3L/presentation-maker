@@ -1,4 +1,6 @@
 import type { CSSProperties } from 'react';
+import type { MouseEvent } from 'react';
+import type { SlideObject as SlideObjectModel } from '../types/objects';
 import type { Slide } from '../types/slide';
 import { SlideObject } from './SlideObject';
 import styles from './SlidePreview.module.css';
@@ -8,8 +10,10 @@ type SlidePreviewProps = {
 	onDeleteObject?: (objectId: string) => void;
 	selectedObjectIds?: string[];
 	onObjectClick?: (objectId: string, shiftKey: boolean) => void;
+	onObjectMouseDown?: (event: MouseEvent<HTMLDivElement>, objectId: string) => void;
+	onObjectResizeMouseDown?: (event: MouseEvent<HTMLDivElement>, object: SlideObjectModel) => void;
 	onCanvasClick?: () => void;
-	variant?: 'thumbnail' | 'presentation';
+	variant?: 'thumbnail' | 'presentation' | 'pdf';
 };
 
 function SlidePreview({
@@ -17,6 +21,8 @@ function SlidePreview({
 	onDeleteObject,
 	selectedObjectIds = [],
 	onObjectClick,
+	onObjectMouseDown,
+	onObjectResizeMouseDown,
 	onCanvasClick,
 	variant,
 }: SlidePreviewProps) {
@@ -54,6 +60,8 @@ function SlidePreview({
 					onRemove={onDeleteObject}
 					selected={selectedObjectIds.includes(object.id)}
 					onClick={onObjectClick}
+					onMouseDown={onObjectMouseDown}
+					onResizeMouseDown={onObjectResizeMouseDown}
 				/>
 			))}
 		</div>

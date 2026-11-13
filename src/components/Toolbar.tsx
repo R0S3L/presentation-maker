@@ -1,19 +1,28 @@
-import { useRef } from 'react';
 import type { Presentation } from '../types/presentation';
 import { dispatch } from '../editor';
-import { addImageObject } from '../functions/objectsFunc';
 import { updatePresentationName, savePresentation } from '../functions/presentationFunc';
 import { addSlide } from '../functions/slideFunc';
+import { useAddImageToSlide } from '../hooks/useAddImageToSlide';
+import { useImageInput } from '../hooks/useImageInput';
+import { usePdfExport } from '../hooks/usePdfExport';
 import { Button } from './Button';
 import { TextInput } from './TextInput';
-import { updateSlide } from '../functions/slideFunc';
 import styles from './Toolbar.module.css';
 
-type ToolbarProps = { presentation: Presentation; onPreview: () => void };
+type ToolbarProps = {
+	presentation: Presentation;
+	onPreview: () => void;
+	canUndo: boolean;
+	canRedo: boolean;
+	onUndo: () => void;
+	onRedo: () => void;
+};
 
-function Toolbar({ presentation, onPreview }: ToolbarProps) {
-	const imageInput = useRef<HTMLInputElement>(null);
+function Toolbar({ presentation, onPreview, canUndo, canRedo, onUndo, onRedo }: ToolbarProps) {
 	const activeSlide = presentation.slides.find(slide => slide.id === presentation.activeSlideId);
+	const addImage = useAddImageToSlide(activeSlide);
+	const { inputRef: imageInput, openFilePicker, handleFileChange } = useImageInput(addImage);
+	const { exportToPdf, isExporting, error: exportError } = usePdfExport();
 
 	function save() {
 		const blob = new Blob([savePresentation(presentation)], { type: 'application/json' });
@@ -25,20 +34,8 @@ function Toolbar({ presentation, onPreview }: ToolbarProps) {
 		URL.revokeObjectURL(url);
 	}
 
-	function addImage(file?: File) {
-		if (!file || !activeSlide) return;
-		const reader = new FileReader();
-		reader.onload = () => {
-			if (typeof reader.result !== 'string') return;
-			dispatch(current => updateSlide(current, activeSlide.id, slide =>
-				addImageObject(slide, reader.result as string, 80, 60, 320, 220)));
-		};
-		reader.readAsDataURL(file);
-	}
-
 	return (
 		<header className={styles.toolbar}>
-			<div className={styles.brandMark} role="img" aria-label="Presentation Maker">P<span>.</span></div>
 			<div className={styles.presentationTitle}>
 				<span className={styles.eyebrow}>ПРЕЗЕНТАЦИЯ</span>
 				<TextInput
@@ -49,18 +46,26 @@ function Toolbar({ presentation, onPreview }: ToolbarProps) {
 				/>
 			</div>
 			<div className={styles.actions}>
+				<Button text="↩" variant="secondary" onClick={onUndo} disabled={!canUndo} />
+				<Button text="↪" variant="secondary" onClick={onRedo} disabled={!canRedo} />
 				<Button text="＋ Слайд" variant="secondary" onClick={() => dispatch(addSlide, 'Новый слайд')} />
 				<input
 					ref={imageInput}
 					className="visuallyHidden"
 					type="file"
 					accept="image/*"
-					onChange={event => { addImage(event.currentTarget.files?.[0]); event.currentTarget.value = ''; }}
+					onChange={handleFileChange}
 				/>
-				<Button text="Изображение" variant="secondary" onClick={() => imageInput.current?.click()} disabled={!activeSlide} />
 				<Button text="Сохранить" variant="secondary" onClick={save} />
+				<Button
+					text={isExporting ? 'Экспорт PDF…' : 'Экспорт PDF'}
+					variant="secondary"
+					onClick={() => void exportToPdf(presentation)}
+					disabled={isExporting}
+				/>
 				<Button text="Предпросмотр" variant="primary" onClick={onPreview} />
 			</div>
+			{exportError && <p className={styles.exportError} role="alert">{exportError}</p>}
 		</header>
 	);
 }
